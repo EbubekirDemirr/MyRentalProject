@@ -9,7 +9,7 @@ namespace Entities.Concrete
 {
     public class Car: IEntity
     {
-        public int CarId { get; set; }
+        public int CarId { get; set; } // Burada class adı nesne adı Car PK ise CarId anlaşılır yani kod bunu anlıyor bakıyor class adı Car Prop adı da CarId hee bu PK diyor
         public string CarName { get; set; }
         public int BrandId { get; set;}
         public int ColorId { get; set;}

@@ -9,7 +9,7 @@ namespace Entities.Concrete
 {
     public class Brand:IEntity
     {
-        public int BrandId { get; set; }
+        public int BrandId { get; set; } //bak yine aynı şey Brand classın adı BrandId prop adı 
         public string BrandName { get; set; }
     }
 }
