@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\Uploads\Images\34032749-210d-4fd5-97a2-2e9d05055389.jpg" />
+    <Content Remove="wwwroot\Uploads\Images\994dbb2b-755e-4357-b1c6-4a7f64bf10dc.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="FluentAssertions" Version="6.11.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.0" />

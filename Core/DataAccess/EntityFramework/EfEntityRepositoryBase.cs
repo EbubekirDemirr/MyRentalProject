@@ -24,6 +24,7 @@ namespace Core.DataAccess.EntityFramework
             }
         }
 
+
         public void Delete(TEntity entity)
         {
             using (TContext context = new TContext())
@@ -38,7 +39,7 @@ namespace Core.DataAccess.EntityFramework
         {
             using (TContext context = new TContext())
             {
-                return context.Set<TEntity>().SingleOrDefault(filter);
+                return context.Set<TEntity>().FirstOrDefault(filter);
             }
         }
 
@@ -61,5 +62,7 @@ namespace Core.DataAccess.EntityFramework
                 context.SaveChanges();
             }
         }
+
+     
     }
 }

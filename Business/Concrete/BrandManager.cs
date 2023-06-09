@@ -4,6 +4,7 @@ using Core.Utilities.Results;
 using Dataaccess.Abstract;
 using Dataaccess.Concrete.EntityFramework;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +42,10 @@ namespace Business.Concrete
         public IDataResult<Brand> GetById(int brandId)
         {
             return new SuccessDataResult<Brand>(_brandDal.Get(b => b.BrandId == brandId));
+        }
+        public IDataResult<List<CarDetailDTO>> GetCarByBrandId(int brandId)
+        {
+            return new SuccessDataResult<List<CarDetailDTO>>(_brandDal.GetCarByBrandId(brandId));
         }
 
         public IResult Update(Brand brand)
