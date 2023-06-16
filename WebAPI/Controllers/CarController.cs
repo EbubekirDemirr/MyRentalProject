@@ -71,7 +71,7 @@ namespace WebAPI.Controllers
             }
             return BadRequest();
         }
-        [HttpPost("add")]
+        [HttpPost("carAdd")]
         public IActionResult Add(Car car)
         {
             var result = _carService.Add(car);

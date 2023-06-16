@@ -5,6 +5,7 @@ using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
+using Core.Utilities.BusinessRules;
 using Core.Utilities.Results;
 using Dataaccess.Abstract;
 using Entities.Concrete;
@@ -22,10 +23,12 @@ namespace Business.Concrete
        
     {
         ICarDal _carDal;
+        IBrandService _brandService;
 
-        public CarManager(ICarDal carDal)
+        public CarManager(ICarDal carDal, IBrandService brandService)
         {
             _carDal = carDal;
+            _brandService = brandService;
         }
 
         [SecuredOperation("car.add,admin")]
@@ -33,9 +36,36 @@ namespace Business.Concrete
         //[CacheRemoveAspect("ICarService.Get")]
         public IResult Add(Car car)
         {
+            IResult result = BusinessRules.Run(CheckIfCarCountOfBrandCorrect(car.BrandId), CheckIfBrandLimitExceded());
 
+            if (result != null)
+            {
+                return result;
+            }
             _carDal.Add(car);
             return new SuccessResult(Messages.Added);
+        }
+
+        private IResult CheckIfCarCountOfBrandCorrect(int brandId)
+        {
+            if (brandId == 1)
+            {
+                var result = _carDal.GetAll(c => c.BrandId == brandId).Count;
+                if (result >= 4)
+                {
+                    return new ErrorResult(Messages.PasswordError);
+                }
+            }
+            return new SuccessResult();
+        }
+        private IResult CheckIfBrandLimitExceded()
+        {
+            var result = _brandService.GetAll();
+            if (result.Data.Count > 15)
+            {
+                return new ErrorResult();
+            }
+            return new SuccessResult();
         }
 
         public IResult Delete(Car car)

@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Core.Utilities.Results
 {
-    //TEMEL VOİDLER İÇİN BAŞLANGIÇ
     public interface IResult
         
     {
